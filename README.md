@@ -1,1 +1,1 @@
-I developed this task last year. For my Probability and Statistics lesson.
+I developed this task last year for my Probability and Statistics lesson.
