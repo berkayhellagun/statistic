@@ -1,14 +1,14 @@
 import random
 from collections import Counter
 from math import sqrt
-import numpy as np
+from re import S
 
 def rastgele():
-    min_value=float(input("Alt sınır nedir ? "))
-    max_value=float(input("Üst sınır nedir ? "))
+    min_value=float(input("Alt sınır:  "))
+    max_value=float(input("Üst sınır:  "))
     
 
-    rang=int(input("Kaç değer üretilecek ?"))
+    rang=int(input("Kaç değer üretilecek: "))
 
     rand_list=[]
 
@@ -48,7 +48,7 @@ def sistematikRandom():
 
     print(listofnumber)
 
-def sırala():
+def sirala():
     a=int(input("Kaç tane veri gireceksiniz? : "))
     
     value_list=[]
@@ -109,33 +109,33 @@ def frekansTable():
     if H!=h:
         h=h+1
 
-    altSınır=[]
-    ustSınır=[]
+    lowerLimit=[]
+    upperLimit=[]
 
-    altSınır.append(S)
+    lowerLimit.append(S)
     for i in range(1,k):
-        added=altSınır[i-1]+h
-        altSınır.append(added)
+        added=lowerLimit[i-1]+h
+        lowerLimit.append(added)
 
-    ustSınır.append(altSınır[1]-1)
+    upperLimit.append(lowerLimit[1]-1)
     for i in range(1,k):
-        added=ustSınır[i-1]+h
-        ustSınır.append(added)
+        added=upperLimit[i-1]+h
+        upperLimit.append(added)
     
     #sınıf sınırı 
-    degişenDeger=(altSınır[1]+ustSınır[0])/2
-    chAltSınır=[]
-    chUstSınır=[]
+    degisenDeger=(lowerLimit[1]+upperLimit[0])/2
+    chLowerLimit=[]
+    chUpperLimit=[]
 
-    firstValue=degişenDeger-h
-    chAltSınır.append(firstValue)
+    firstValue=degisenDeger-h
+    chLowerLimit.append(firstValue)
     for i in range(1,k):
-        added2=chAltSınır[i-1]+h
-        chAltSınır.append(added2)
-    chUstSınır.append(degişenDeger)
+        added2=chLowerLimit[i-1]+h
+        chLowerLimit.append(added2)
+    chUpperLimit.append(degisenDeger)
     for i in range(1,k):
-        added2=chUstSınır[i-1]+h
-        chUstSınır.append(added2)
+        added2=chUpperLimit[i-1]+h
+        chUpperLimit.append(added2)
 
 ##sınıf frekans
     
@@ -145,10 +145,10 @@ def frekansTable():
 
     for i in frekansTablosu:
         for j in range(0,k):
-            if i<=chUstSınır[j] and i>=chAltSınır[j]:
+            if i<=chUpperLimit[j] and i>=chLowerLimit[j]:
                 freq[j]+=1
 ##sınıf orta noktası
-    mid_point=(altSınır[0]+ustSınır[0])/2
+    mid_point=(lowerLimit[0]+upperLimit[0])/2
 
 ##eklenik frekans
     eklenikFreq=[]
@@ -175,15 +175,14 @@ def frekansTable():
         eklenikOransalFreq[i]=eklenikFreq[i]/n    
 
     ##yazdırma
-    print("\nSınıf Alt Sınır :",altSınır,"\nSınıf Üst Sınır : ",ustSınır)
-    print("\nSınıf Alt Limit : ",chAltSınır,"\nSınıf Üst Limit : ",chUstSınır)
+    print("\nSınıf Alt Sınır :",lowerLimit,"\nSınıf Üst Sınır : ",upperLimit)
+    print("\nSınıf Alt Limit : ",chLowerLimit,"\nSınıf Üst Limit : ",chUpperLimit)
     print("\nFrekans Değerleri : ",freq)
     print("\nSınıf Orta Noktası : ",mid_point)
     print("\nEklenik Frekans : ",eklenikFreq,"\nOransal Frekans : ",oransalFreq,"\nEklenik Oransal Frekans :",eklenikOransalFreq)
 
 def merkeziEgilim():
 
-    warning="Veri girişini sonlandırmak için -1 tuşlayınız."
     print(warning)
     listofvalue=[]
     
@@ -196,9 +195,7 @@ def merkeziEgilim():
 
     rang=len(listofvalue)
     
-    toplam=sum(listofvalue)
-
-    aritmat=f"\nAritmetik deger : {toplam/rang}"
+    aritmat=f"\nAritmetik deger : {aritmetik(listofvalue)}"
     print(aritmat)
 
     listofvalue.sort()
@@ -232,7 +229,7 @@ def median(median_numbers):
     else:
         return median_numbers[middle]
 
-def dagılımOlculeri():
+def dagilimOlculeri():
     sd = 0.0 # standart sapma
     aratop=0
     sonuc=0
@@ -340,27 +337,25 @@ def permKomb():
     
 
 
-def main(seçilen):
+def main(secilen):
     
-    if seçilen=='1':
+    if secilen=='1':
         rastgele()
-    elif seçilen=='2':
+    elif secilen=='2':
         sistematikRandom()
-    elif seçilen=='3':
-        sırala()
-    elif seçilen=='4':
+    elif secilen=='3':
+        sirala()
+    elif secilen=='4':
         frekansSerisi()
-    elif seçilen=='5':
+    elif secilen=='5':
         frekansTable()
-    elif seçilen=='6':
+    elif secilen=='6':
         merkeziEgilim()
-    elif seçilen=='7':
-
-        s_deger=dagılımOlculeri()
+    elif secilen=='7':
+        s_deger=dagilimOlculeri()
         v_deger=varyans(s_deger)
         print("Standart Sapma : ", s_deger, "\nVaryans Degeri : ", v_deger)
-        
-    elif seçilen=='8':
+    elif secilen=='8':
         permKomb()
     else:
         print("Hatalı giriş tuşladınız, lütfen tekrar deneyiniz.")
@@ -382,15 +377,15 @@ print("""
 def tekrarSecim():
     
     while True:
-        seçilen=input("\nYapılacak işlemi seçiniz : ")
-        if seçilen=='-1':
+        secilen=input("\nYapılacak işlemi seçiniz : ")
+        if secilen=='-1':
             print("Görüşmek üzere..")
             break
-        elif seçilen==False:
+        elif secilen==False:
             print("Görüşmek üzere..")
             break
         else:
-            main(seçilen)
+            main(secilen)
 
 tekrarSecim()
 
